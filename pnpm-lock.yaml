@@ -29,6 +29,9 @@ importers:
 
   packages/examples/without-react-router:
     dependencies:
+      '@baurine/use-url-state':
+        specifier: workspace:^
+        version: link:../../use-url-state-hook
       react:
         specifier: ^18.3.1
         version: 18.3.1
