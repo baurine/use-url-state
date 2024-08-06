@@ -1,5 +1,5 @@
 import { useUrlState } from '@baurine/use-url-state'
-import { useCallback, useMemo } from 'react'
+import { useCallback } from 'react'
 
 type ExampleUrlState = Partial<Record<'count', string>>
 
