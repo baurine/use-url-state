@@ -28,12 +28,12 @@ jobs:
       - name: Test
         run: pnpm test
 
-      - name: Create Release Pull Request or Publish
-        uses: changesets/action@v1
-        with:
-          commit: 'release: bump versions'
-          title: 'release: bump versions'
-          publish: pnpm changeset publish
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_REG_PUBLISH_TOKEN }}
+      # - name: Create Release Pull Request or Publish
+      #   uses: changesets/action@v1
+      #   with:
+      #     commit: 'release: bump versions'
+      #     title: 'release: bump versions'
+      #     publish: pnpm changeset publish
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #     NPM_TOKEN: ${{ secrets.NPM_REG_PUBLISH_TOKEN }}
