@@ -1,5 +1,4 @@
 import { useUrlState } from '@baurine/use-url-state'
-import { useCallback } from 'react'
 
 type ExampleUrlState = Partial<Record<'count', string>>
 
@@ -8,16 +7,7 @@ export function useExampleUrlState() {
 
   // count
   const count = parseInt(queryParams.count ?? '')
-  // const count = useMemo(() => {
-  //   const c = parseInt(queryParams.count ?? '')
-  //   if (isNaN(c)) {
-  //     return 0
-  //   }
-  //   return c
-  // }, [queryParams.count])
-  const setCount = useCallback((v?: string) => {
-    setQueryParams({ count: v })
-  }, [])
+  const setCount = (v?: string) => setQueryParams({ count: v })
 
   return { count, setCount }
 }
