@@ -1,10 +1,34 @@
+// this example code is copied and edited from https://v5.reactrouter.com/web/example/query-parameters
+
 import React from 'react'
 import {
   // BrowserRouter as Router,
   HashRouter as Router,
   Link,
-  useLocation
+  useLocation,
+  useHistory
 } from 'react-router-dom'
+import { Counter } from './Counter'
+import { UrlStateProvider } from '@baurine/use-url-state'
+
+function ReactRouter5UrlStateProvider(props: { children: React.ReactNode }) {
+  const loc = useLocation()
+  const history = useHistory()
+
+  return (
+    <UrlStateProvider
+      value={{
+        urlQuery: loc.search,
+        setUrlQuery(v) {
+          // the v doesn't include `?`
+          history.replace(`${loc.pathname}?${v}`)
+        }
+      }}
+    >
+      {props.children}
+    </UrlStateProvider>
+  )
+}
 
 // React Router does not have any opinions about
 // how you should parse URL query strings.
@@ -20,7 +44,9 @@ import {
 export default function QueryParamsExample() {
   return (
     <Router>
-      <QueryParamsDemo />
+      <ReactRouter5UrlStateProvider>
+        <QueryParamsDemo />
+      </ReactRouter5UrlStateProvider>
     </Router>
   )
 }
@@ -56,6 +82,7 @@ function QueryParamsDemo() {
         </ul>
 
         <Child name={query.get('name') ?? ''} />
+        <Counter />
       </div>
     </div>
   )

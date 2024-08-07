@@ -1,4 +1,4 @@
-import { createContext, useContext, useMemo, useState } from 'react'
+import { createContext, useContext, useEffect, useMemo, useState } from 'react'
 
 type UrlStateCtxValue = {
   urlQuery: string
@@ -11,40 +11,41 @@ const useUrlStateContext = () => {
   const context = useContext(UrlStateContext)
 
   if (!context) {
-    throw new Error('useUrlStateContext must be used within a provider')
+    throw new Error('useUrlStateContext must be used within a UrlStateProvider')
   }
 
   return context
 }
 
-type UrlStateProviderOptions = {
-  getUrlQuery: () => string
-  updateUrlQuery: (p: string) => void
-}
-
-const defaultOptions: UrlStateProviderOptions = {
-  getUrlQuery() {
-    const url = new URL(window.location.href)
-    return url.search
-  },
-  updateUrlQuery(p) {
-    const url = new URL(window.location.href)
-    window.history.replaceState({}, '', `${url.pathname}?${p}`)
+function defCtxVal(): UrlStateCtxValue {
+  return {
+    urlQuery: new URL(window.location.href).search,
+    setUrlQuery(p) {
+      const url = new URL(window.location.href)
+      window.history.replaceState({}, '', `${url.pathname}?${p}`)
+    }
   }
 }
 
 export function UrlStateProvider(props: {
   children: React.ReactNode
-  options?: UrlStateProviderOptions
+  value?: UrlStateCtxValue
 }) {
-  const opt = props.options || defaultOptions
-  const [urlQuery, _setUrlQuery] = useState(opt.getUrlQuery())
+  const val: UrlStateCtxValue = props.value || defCtxVal()
+
+  const [urlQuery, _setUrlQuery] = useState(val.urlQuery)
+
+  // sync external urlQuery changes
+  useEffect(() => {
+    _setUrlQuery(val.urlQuery)
+  }, [val.urlQuery])
 
   const ctxValue = useMemo(
     () => ({
       urlQuery,
       setUrlQuery: (v: string) => {
-        opt.updateUrlQuery(v)
+        val.setUrlQuery(v)
+        // trigger re-render
         _setUrlQuery(v)
       }
     }),
