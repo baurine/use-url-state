@@ -25,12 +25,10 @@ function CountValue() {
 
 export function Counter() {
   return (
-    <>
-      <div>
-        <h2>@baurine/use-url-state demo</h2>
-      </div>
+    <div>
+      <h2>@baurine/use-url-state demo</h2>
       <CountButton />
       <CountValue />
-    </>
+    </div>
   )
 }

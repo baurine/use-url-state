@@ -11,6 +11,8 @@ import {
 import { Counter } from './Counter'
 import { UrlStateProvider } from '@baurine/use-url-state'
 
+import './App.css'
+
 function ReactRouter5UrlStateProvider(props: { children: React.ReactNode }) {
   const loc = useLocation()
   const history = useHistory()
@@ -20,7 +22,6 @@ function ReactRouter5UrlStateProvider(props: { children: React.ReactNode }) {
       value={{
         urlQuery: loc.search,
         setUrlQuery(v) {
-          // the v doesn't include `?`
           history.replace(`${loc.pathname}?${v}`)
         }
       }}
@@ -60,8 +61,6 @@ function useQuery() {
 }
 
 function QueryParamsDemo() {
-  let query = useQuery()
-
   return (
     <div>
       <div>
@@ -81,23 +80,30 @@ function QueryParamsDemo() {
           </li>
         </ul>
 
-        <Child name={query.get('name') ?? ''} />
+        <Child field="name" />
+        <Child field="count" />
+
         <Counter />
       </div>
     </div>
   )
 }
 
-function Child({ name }: { name: string }) {
+function Child({ field }: { field: string }) {
+  const query = useQuery()
+  const val = query.get(field)
+
   return (
     <div>
-      {name ? (
+      {val ? (
         <h3>
-          The <code>name</code> in the query string is &quot;{name}
+          The <code>{field}</code> in the query string is &quot;{val}
           &quot;
         </h3>
       ) : (
-        <h3>There is no name in the query string</h3>
+        <h3>
+          There is no <code>{field}</code> in the query string
+        </h3>
       )}
     </div>
   )
