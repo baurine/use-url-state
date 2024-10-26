@@ -2,11 +2,13 @@
   "name": "use-url-state",
   "private": "true",
   "version": "0.0.1",
+  "type": "module",
   "description": "",
   "scripts": {
     "prepare": "husky",
     "dev": "pnpm -r --parallel dev",
     "build": "pnpm -r build",
+    "lint": "eslint .",
     "test": "echo test"
   },
   "keywords": [],
@@ -14,11 +16,18 @@
   "license": "MIT",
   "devDependencies": {
     "@changesets/cli": "^2.27.5",
-    "concurrently": "^8.2.2",
-    "eslint": "^9.4.0",
-    "husky": "^9.0.11",
-    "lint-staged": "^15.2.5",
-    "prettier": "^3.3.1"
+    "@eslint/js": "^9.11.1",
+    "concurrently": "^9.0.1",
+    "eslint": "^9.11.1",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-react-hooks": "^5.1.0-rc.0",
+    "eslint-plugin-react-refresh": "^0.4.12",
+    "globals": "^15.9.0",
+    "husky": "^9.1.6",
+    "lint-staged": "^15.2.10",
+    "prettier": "^3.3.3",
+    "typescript": "^5.5.3",
+    "typescript-eslint": "^8.7.0"
   },
   "lint-staged": {
     "*.+(ts|tsx|js)": [
@@ -28,8 +37,7 @@
     "*.+(json|css|md|html)": "prettier --write"
   },
   "engines": {
-    "node": ">= 20",
-    "pnpm": ">= 9"
+    "node": ">=20.18.0 <21.0.0"
   },
-  "packageManager": "pnpm@9.5.0"
+  "packageManager": "pnpm@9.12.2"
 }
