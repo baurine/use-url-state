@@ -1,5 +1,6 @@
 // this example code is copied and edited from https://v5.reactrouter.com/web/example/query-parameters
 
+import { UrlStateProvider } from '@baurine/use-url-state'
 import React from 'react'
 import {
   // BrowserRouter as Router,
@@ -8,8 +9,8 @@ import {
   useLocation,
   useHistory
 } from 'react-router-dom'
+
 import { Counter } from './Counter'
-import { UrlStateProvider } from '@baurine/use-url-state'
 
 import './App.css'
 
