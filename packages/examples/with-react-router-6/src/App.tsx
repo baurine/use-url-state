@@ -3,27 +3,27 @@
 import { UrlStateProvider } from '@baurine/use-url-state'
 import React from 'react'
 import {
-  // BrowserRouter as Router,
-  HashRouter as Router,
+  BrowserRouter as Router,
+  // HashRouter as Router,
   Link,
   useLocation,
-  useHistory
+  useNavigate
 } from 'react-router-dom'
 
 import { Counter } from './Counter'
 
 import './App.css'
 
-function ReactRouter5UrlStateProvider(props: { children: React.ReactNode }) {
+function ReactRouter6UrlStateProvider(props: { children: React.ReactNode }) {
   const loc = useLocation()
-  const history = useHistory()
+  const navigate = useNavigate()
 
   return (
     <UrlStateProvider
       value={{
         urlQuery: loc.search,
         setUrlQuery(v) {
-          history.replace(`${loc.pathname}?${v}`)
+          navigate(`${loc.pathname}?${v}`)
         }
       }}
     >
@@ -46,9 +46,9 @@ function ReactRouter5UrlStateProvider(props: { children: React.ReactNode }) {
 export default function QueryParamsExample() {
   return (
     <Router>
-      <ReactRouter5UrlStateProvider>
+      <ReactRouter6UrlStateProvider>
         <QueryParamsDemo />
-      </ReactRouter5UrlStateProvider>
+      </ReactRouter6UrlStateProvider>
     </Router>
   )
 }

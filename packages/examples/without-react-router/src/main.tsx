@@ -1,6 +1,7 @@
+import { UrlStateProvider } from '@baurine/use-url-state'
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import { UrlStateProvider } from '@baurine/use-url-state'
+
 import App from './App.tsx'
 import './index.css'
 

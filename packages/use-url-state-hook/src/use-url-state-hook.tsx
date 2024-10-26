@@ -49,7 +49,7 @@ export function UrlStateProvider(props: {
         _setUrlQuery(v)
       }
     }),
-    [urlQuery]
+    [urlQuery, val]
   )
 
   return (
@@ -74,7 +74,7 @@ export function useUrlState<T extends UrlState = UrlState>(): [
 
   const queryParams = useMemo(() => {
     const searchParams = new URLSearchParams(urlQuery)
-    const paramsObj: any = {}
+    const paramsObj: Record<string, string> = {}
     searchParams.forEach((v, k) => {
       paramsObj[k] = v
     })
