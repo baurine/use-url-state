@@ -100,6 +100,30 @@ function ReactRouter6UrlStateProvider(props: { children: React.ReactNode }) {
 }
 ```
 
+Adapter for tanstack-router v1:
+
+```tsx
+import { useLocation, useNavigate } from '@tanstack/react-router'
+
+function TanStackRouterUrlStateProvider(props: { children: React.ReactNode }) {
+  const loc = useLocation()
+  const navigate = useNavigate()
+
+  return (
+    <UrlStateProvider
+      value={{
+        urlQuery: loc.searchStr,
+        setUrlQuery(v: string) {
+          navigate({ to: `${loc.pathname}?${v}` })
+        }
+      }}
+    >
+      {props.children}
+    </UrlStateProvider>
+  )
+}
+```
+
 ### Step 2
 
 Define your own url state hook, use `useUrlState()` to get query, parse it manually, and set query.
@@ -164,3 +188,5 @@ export function Counter() {
 ## Demo
 
 https://github.com/user-attachments/assets/4efdca4b-e542-4af3-b090-44a64736915e
+
+https://github.com/user-attachments/assets/fcf9f5ca-ed4d-477d-af2d-80e1d4d1ea2c
